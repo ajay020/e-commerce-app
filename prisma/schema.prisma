@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+ provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  orders    Order[]
+  cart      Cart?
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  price       Int      // store price in cents
+  imageUrl    String
+  stock       Int
+  createdAt   DateTime @default(now())
+
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+}
+
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  createdAt DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id])
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId   String
+  productId String
+  quantity  Int
+
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  userId        String
+  totalAmount   Int
+  status        OrderStatus @default(PENDING)
+  stripeSession String?
+  createdAt     DateTime    @default(now())
+
+  user          User        @relation(fields: [userId], references: [id])
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  price     Int
+  quantity  Int
+
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  CANCELLED
+}
+
