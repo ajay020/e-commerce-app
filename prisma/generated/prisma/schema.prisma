@@ -5,14 +5,12 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum Role {
   USER
   ADMIN
 }
-
 
 model User {
   id        String   @id @default(cuid())
@@ -22,14 +20,14 @@ model User {
   role      Role     @default(USER)
   createdAt DateTime @default(now())
 
-  orders    Order[]
-  cart      Cart?
+  orders Order[]
+  cart   Cart?
 }
 
 model Category {
-  id       String    @id @default(cuid())
-  name     String
-  slug     String    @unique
+  id   String @id @default(cuid())
+  name String
+  slug String @unique
 
   products Product[]
 }
@@ -39,16 +37,16 @@ model Product {
   name        String
   slug        String   @unique
   description String
-  price       Int      // store price in cents
+  price       Int // store price in cents
   imageUrl    String
   stock       Int
   createdAt   DateTime @default(now())
 
-  categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
 
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
+  orderItems OrderItem[]
+  cartItems  CartItem[]
 }
 
 model Cart {
@@ -56,18 +54,18 @@ model Cart {
   userId    String?  @unique
   createdAt DateTime @default(now())
 
-  user      User?    @relation(fields: [userId], references: [id])
-  items     CartItem[]
+  user  User?      @relation(fields: [userId], references: [id])
+  items CartItem[]
 }
 
 model CartItem {
-  id        String   @id @default(cuid())
-  cartId   String
+  id        String @id @default(cuid())
+  cartId    String
   productId String
   quantity  Int
 
-  cart      Cart     @relation(fields: [cartId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
+  cart    Cart    @relation(fields: [cartId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 
   @@unique([cartId, productId])
 }
@@ -80,21 +78,20 @@ model Order {
   stripeSession String?
   createdAt     DateTime    @default(now())
 
-  user          User        @relation(fields: [userId], references: [id])
-  items         OrderItem[]
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
 }
 
 model OrderItem {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   orderId   String
   productId String
   price     Int
   quantity  Int
 
-  order     Order    @relation(fields: [orderId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 }
-
 
 enum OrderStatus {
   PENDING
@@ -102,4 +99,3 @@ enum OrderStatus {
   SHIPPED
   CANCELLED
 }
-
