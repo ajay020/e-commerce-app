@@ -1,5 +1,6 @@
 import { getProducts } from "@/lib/products";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function HomePage() {
   const products = await getProducts();

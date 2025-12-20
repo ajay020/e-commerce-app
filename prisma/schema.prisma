@@ -5,7 +5,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -18,7 +17,7 @@ model User {
   id        String   @id @default(cuid())
   name      String?
   email     String   @unique
-  password  String?
+  password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
 
@@ -61,9 +60,13 @@ model Cart {
 }
 
 model CartItem {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   cartId   String
   productId String
+
+  name      String
+  price     Int      // snapshot price
+  imageUrl  String
   quantity  Int
 
   cart      Cart     @relation(fields: [cartId], references: [id])

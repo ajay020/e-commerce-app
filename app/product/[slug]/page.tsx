@@ -1,9 +1,13 @@
+import AddToCartButton from "@/components/add-button";
 import { getProductBySlug } from "@/lib/products";
+import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
     const product = await getProductBySlug(slug);
+
+    console.log("Session>>>", getServerSession())
 
     return {
         title: product?.name,
@@ -11,8 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
-
-export default async function ProductPage(
+export default async function ProductDetailsPage(
     { params }: { params: Promise<{ slug: string }> }
 ) {
     const { slug } = await params;
@@ -36,9 +39,14 @@ export default async function ProductPage(
                     ₹{(product.price / 100).toFixed(2)}
                 </p>
 
-                <button className="mt-6 px-6 py-3 bg-black text-white rounded">
-                    Add to Cart
-                </button>
+                <AddToCartButton product={
+                    {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        imageUrl: product.imageUrl
+                    }
+                } />
             </div>
         </main>
     );
