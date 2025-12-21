@@ -3,7 +3,6 @@ import { placeOrder } from '../actions/orders';
 import { redirect } from 'next/navigation';
 
 export default function PlaceHolderButton() {
-
     async function handlePlaceOrder() {
         const orderId = await placeOrder();
         redirect(`/order/success/${orderId}`);

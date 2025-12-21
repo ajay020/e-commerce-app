@@ -4,7 +4,6 @@ import { notFound, redirect } from "next/navigation";
 import { getCartForCheckout } from "../actions/cart";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { placeOrder } from "../actions/orders";
 import PlaceHolderButton from "./place-holder-button";
 
 export default async function CheckoutPage() {

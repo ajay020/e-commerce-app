@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function OrderSuccessPage(
@@ -12,6 +13,7 @@ export default async function OrderSuccessPage(
     if (!order) notFound();
 
     return (
+
         <div className="max-w-xl mx-auto p-6 text-center">
             <h1 className="text-3xl font-bold text-green-600">
                 Order Placed Successfully 🎉
@@ -28,5 +30,6 @@ export default async function OrderSuccessPage(
                 Status: {order.status}
             </p>
         </div>
+
     );
 }
