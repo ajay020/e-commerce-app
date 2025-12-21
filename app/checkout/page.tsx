@@ -1,8 +1,11 @@
+"use server"
+
 import { notFound, redirect } from "next/navigation";
 import { getCartForCheckout } from "../actions/cart";
-import PlaceOrderButton from "./place-order-button";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { placeOrder } from "../actions/orders";
+import PlaceHolderButton from "./place-holder-button";
 
 export default async function CheckoutPage() {
     const session = await getServerSession(authOptions);
@@ -41,7 +44,10 @@ export default async function CheckoutPage() {
                 <span>₹{(total / 100).toFixed(2)}</span>
             </div>
 
-            <PlaceOrderButton total={total} />
+            <div className="mt-4">
+                <PlaceHolderButton />
+            </div>
+
         </main>
     );
 }
