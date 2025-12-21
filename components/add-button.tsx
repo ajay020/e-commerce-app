@@ -1,10 +1,12 @@
 "use client"
 
 import { addToCart } from "@/app/actions/cart";
+import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
 export default function AddToCartButton({ product }: { product: any }) {
     const [isPending, startTransition] = useTransition();
+    const router =  useRouter()
 
     async function handleAddToCart() {
 
@@ -17,12 +19,18 @@ export default function AddToCartButton({ product }: { product: any }) {
                     imageUrl: product.imageUrl,
                 },
             )
+            
+            router.refresh();
         })
     }
 
     return (
         <button
-            className=" bg-black text-white p-2 pointer rounded disabled:opacity-50"
+            disabled={isPending}
+            className={
+                `${isPending ? "opacity-50 cursor-not-allowed" : ""}
+             bg-black text-white p-2 cursor-pointer rounded disabled:opacity-50`
+            }
             onClick={handleAddToCart}
         >
             {isPending ? "Adding..." : "Add to Cart"}

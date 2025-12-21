@@ -7194,7 +7194,6 @@ export namespace Prisma {
     userId: string | null
     totalAmount: number | null
     status: $Enums.OrderStatus | null
-    stripeSession: string | null
     createdAt: Date | null
   }
 
@@ -7203,7 +7202,6 @@ export namespace Prisma {
     userId: string | null
     totalAmount: number | null
     status: $Enums.OrderStatus | null
-    stripeSession: string | null
     createdAt: Date | null
   }
 
@@ -7212,7 +7210,6 @@ export namespace Prisma {
     userId: number
     totalAmount: number
     status: number
-    stripeSession: number
     createdAt: number
     _all: number
   }
@@ -7231,7 +7228,6 @@ export namespace Prisma {
     userId?: true
     totalAmount?: true
     status?: true
-    stripeSession?: true
     createdAt?: true
   }
 
@@ -7240,7 +7236,6 @@ export namespace Prisma {
     userId?: true
     totalAmount?: true
     status?: true
-    stripeSession?: true
     createdAt?: true
   }
 
@@ -7249,7 +7244,6 @@ export namespace Prisma {
     userId?: true
     totalAmount?: true
     status?: true
-    stripeSession?: true
     createdAt?: true
     _all?: true
   }
@@ -7345,7 +7339,6 @@ export namespace Prisma {
     userId: string
     totalAmount: number
     status: $Enums.OrderStatus
-    stripeSession: string | null
     createdAt: Date
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
@@ -7373,7 +7366,6 @@ export namespace Prisma {
     userId?: boolean
     totalAmount?: boolean
     status?: boolean
-    stripeSession?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -7385,7 +7377,6 @@ export namespace Prisma {
     userId?: boolean
     totalAmount?: boolean
     status?: boolean
-    stripeSession?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
@@ -7395,7 +7386,6 @@ export namespace Prisma {
     userId?: boolean
     totalAmount?: boolean
     status?: boolean
-    stripeSession?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
@@ -7405,11 +7395,10 @@ export namespace Prisma {
     userId?: boolean
     totalAmount?: boolean
     status?: boolean
-    stripeSession?: boolean
     createdAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalAmount" | "status" | "stripeSession" | "createdAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalAmount" | "status" | "createdAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -7433,7 +7422,6 @@ export namespace Prisma {
       userId: string
       totalAmount: number
       status: $Enums.OrderStatus
-      stripeSession: string | null
       createdAt: Date
     }, ExtArgs["result"]["order"]>
     composites: {}
@@ -7864,7 +7852,6 @@ export namespace Prisma {
     readonly userId: FieldRef<"Order", 'String'>
     readonly totalAmount: FieldRef<"Order", 'Int'>
     readonly status: FieldRef<"Order", 'OrderStatus'>
-    readonly stripeSession: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
   }
     
@@ -8330,6 +8317,7 @@ export namespace Prisma {
     id: string | null
     orderId: string | null
     productId: string | null
+    name: string | null
     price: number | null
     quantity: number | null
   }
@@ -8338,6 +8326,7 @@ export namespace Prisma {
     id: string | null
     orderId: string | null
     productId: string | null
+    name: string | null
     price: number | null
     quantity: number | null
   }
@@ -8346,6 +8335,7 @@ export namespace Prisma {
     id: number
     orderId: number
     productId: number
+    name: number
     price: number
     quantity: number
     _all: number
@@ -8366,6 +8356,7 @@ export namespace Prisma {
     id?: true
     orderId?: true
     productId?: true
+    name?: true
     price?: true
     quantity?: true
   }
@@ -8374,6 +8365,7 @@ export namespace Prisma {
     id?: true
     orderId?: true
     productId?: true
+    name?: true
     price?: true
     quantity?: true
   }
@@ -8382,6 +8374,7 @@ export namespace Prisma {
     id?: true
     orderId?: true
     productId?: true
+    name?: true
     price?: true
     quantity?: true
     _all?: true
@@ -8477,6 +8470,7 @@ export namespace Prisma {
     id: string
     orderId: string
     productId: string
+    name: string
     price: number
     quantity: number
     _count: OrderItemCountAggregateOutputType | null
@@ -8504,6 +8498,7 @@ export namespace Prisma {
     id?: boolean
     orderId?: boolean
     productId?: boolean
+    name?: boolean
     price?: boolean
     quantity?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8514,6 +8509,7 @@ export namespace Prisma {
     id?: boolean
     orderId?: boolean
     productId?: boolean
+    name?: boolean
     price?: boolean
     quantity?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8524,6 +8520,7 @@ export namespace Prisma {
     id?: boolean
     orderId?: boolean
     productId?: boolean
+    name?: boolean
     price?: boolean
     quantity?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8534,11 +8531,12 @@ export namespace Prisma {
     id?: boolean
     orderId?: boolean
     productId?: boolean
+    name?: boolean
     price?: boolean
     quantity?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "price" | "quantity", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "productId" | "name" | "price" | "quantity", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -8562,6 +8560,7 @@ export namespace Prisma {
       id: string
       orderId: string
       productId: string
+      name: string
       price: number
       quantity: number
     }, ExtArgs["result"]["orderItem"]>
@@ -8992,6 +8991,7 @@ export namespace Prisma {
     readonly id: FieldRef<"OrderItem", 'String'>
     readonly orderId: FieldRef<"OrderItem", 'String'>
     readonly productId: FieldRef<"OrderItem", 'String'>
+    readonly name: FieldRef<"OrderItem", 'String'>
     readonly price: FieldRef<"OrderItem", 'Int'>
     readonly quantity: FieldRef<"OrderItem", 'Int'>
   }
@@ -9485,7 +9485,6 @@ export namespace Prisma {
     userId: 'userId',
     totalAmount: 'totalAmount',
     status: 'status',
-    stripeSession: 'stripeSession',
     createdAt: 'createdAt'
   };
 
@@ -9496,6 +9495,7 @@ export namespace Prisma {
     id: 'id',
     orderId: 'orderId',
     productId: 'productId',
+    name: 'name',
     price: 'price',
     quantity: 'quantity'
   };
@@ -9937,7 +9937,6 @@ export namespace Prisma {
     userId?: StringFilter<"Order"> | string
     totalAmount?: IntFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    stripeSession?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     items?: OrderItemListRelationFilter
@@ -9948,7 +9947,6 @@ export namespace Prisma {
     userId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
-    stripeSession?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
     items?: OrderItemOrderByRelationAggregateInput
@@ -9962,7 +9960,6 @@ export namespace Prisma {
     userId?: StringFilter<"Order"> | string
     totalAmount?: IntFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    stripeSession?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     items?: OrderItemListRelationFilter
@@ -9973,7 +9970,6 @@ export namespace Prisma {
     userId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
-    stripeSession?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
@@ -9990,7 +9986,6 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Order"> | string
     totalAmount?: IntWithAggregatesFilter<"Order"> | number
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
-    stripeSession?: StringNullableWithAggregatesFilter<"Order"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
 
@@ -10001,6 +9996,7 @@ export namespace Prisma {
     id?: StringFilter<"OrderItem"> | string
     orderId?: StringFilter<"OrderItem"> | string
     productId?: StringFilter<"OrderItem"> | string
+    name?: StringFilter<"OrderItem"> | string
     price?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -10011,6 +10007,7 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+    name?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -10024,6 +10021,7 @@ export namespace Prisma {
     NOT?: OrderItemWhereInput | OrderItemWhereInput[]
     orderId?: StringFilter<"OrderItem"> | string
     productId?: StringFilter<"OrderItem"> | string
+    name?: StringFilter<"OrderItem"> | string
     price?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -10034,6 +10032,7 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+    name?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
     _count?: OrderItemCountOrderByAggregateInput
@@ -10050,6 +10049,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"OrderItem"> | string
     orderId?: StringWithAggregatesFilter<"OrderItem"> | string
     productId?: StringWithAggregatesFilter<"OrderItem"> | string
+    name?: StringWithAggregatesFilter<"OrderItem"> | string
     price?: IntWithAggregatesFilter<"OrderItem"> | number
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number
   }
@@ -10379,7 +10379,6 @@ export namespace Prisma {
     id?: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
     items?: OrderItemCreateNestedManyWithoutOrderInput
@@ -10390,7 +10389,6 @@ export namespace Prisma {
     userId: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -10399,7 +10397,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
     items?: OrderItemUpdateManyWithoutOrderNestedInput
@@ -10410,7 +10407,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -10420,7 +10416,6 @@ export namespace Prisma {
     userId: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
   }
 
@@ -10428,7 +10423,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10437,12 +10431,12 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateInput = {
     id?: string
+    name: string
     price: number
     quantity: number
     order: OrderCreateNestedOneWithoutItemsInput
@@ -10453,12 +10447,14 @@ export namespace Prisma {
     id?: string
     orderId: string
     productId: string
+    name: string
     price: number
     quantity: number
   }
 
   export type OrderItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
@@ -10469,6 +10465,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -10477,12 +10474,14 @@ export namespace Prisma {
     id?: string
     orderId: string
     productId: string
+    name: string
     price: number
     quantity: number
   }
 
   export type OrderItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -10491,6 +10490,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -10871,7 +10871,6 @@ export namespace Prisma {
     userId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
-    stripeSession?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10884,7 +10883,6 @@ export namespace Prisma {
     userId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
-    stripeSession?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10893,7 +10891,6 @@ export namespace Prisma {
     userId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
-    stripeSession?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10920,6 +10917,7 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+    name?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
   }
@@ -10933,6 +10931,7 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+    name?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
   }
@@ -10941,6 +10940,7 @@ export namespace Prisma {
     id?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+    name?: SortOrder
     price?: SortOrder
     quantity?: SortOrder
   }
@@ -11536,7 +11536,6 @@ export namespace Prisma {
     id?: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
     items?: OrderItemCreateNestedManyWithoutOrderInput
   }
@@ -11545,7 +11544,6 @@ export namespace Prisma {
     id?: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
     items?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
@@ -11601,7 +11599,6 @@ export namespace Prisma {
     userId?: StringFilter<"Order"> | string
     totalAmount?: IntFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    stripeSession?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
   }
 
@@ -11714,6 +11711,7 @@ export namespace Prisma {
 
   export type OrderItemCreateWithoutProductInput = {
     id?: string
+    name: string
     price: number
     quantity: number
     order: OrderCreateNestedOneWithoutItemsInput
@@ -11722,6 +11720,7 @@ export namespace Prisma {
   export type OrderItemUncheckedCreateWithoutProductInput = {
     id?: string
     orderId: string
+    name: string
     price: number
     quantity: number
   }
@@ -11810,6 +11809,7 @@ export namespace Prisma {
     id?: StringFilter<"OrderItem"> | string
     orderId?: StringFilter<"OrderItem"> | string
     productId?: StringFilter<"OrderItem"> | string
+    name?: StringFilter<"OrderItem"> | string
     price?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
   }
@@ -12078,6 +12078,7 @@ export namespace Prisma {
 
   export type OrderItemCreateWithoutOrderInput = {
     id?: string
+    name: string
     price: number
     quantity: number
     product: ProductCreateNestedOneWithoutOrderItemsInput
@@ -12086,6 +12087,7 @@ export namespace Prisma {
   export type OrderItemUncheckedCreateWithoutOrderInput = {
     id?: string
     productId: string
+    name: string
     price: number
     quantity: number
   }
@@ -12151,7 +12153,6 @@ export namespace Prisma {
     id?: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
   }
@@ -12161,7 +12162,6 @@ export namespace Prisma {
     userId: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
   }
 
@@ -12216,7 +12216,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
   }
@@ -12226,7 +12225,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12271,7 +12269,6 @@ export namespace Prisma {
     id?: string
     totalAmount: number
     status?: $Enums.OrderStatus
-    stripeSession?: string | null
     createdAt?: Date | string
   }
 
@@ -12279,7 +12276,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUpdateManyWithoutOrderNestedInput
   }
@@ -12288,7 +12284,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
@@ -12297,7 +12292,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    stripeSession?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12352,6 +12346,7 @@ export namespace Prisma {
   export type OrderItemCreateManyProductInput = {
     id?: string
     orderId: string
+    name: string
     price: number
     quantity: number
   }
@@ -12367,6 +12362,7 @@ export namespace Prisma {
 
   export type OrderItemUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
@@ -12375,6 +12371,7 @@ export namespace Prisma {
   export type OrderItemUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -12382,6 +12379,7 @@ export namespace Prisma {
   export type OrderItemUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     orderId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -12452,12 +12450,14 @@ export namespace Prisma {
   export type OrderItemCreateManyOrderInput = {
     id?: string
     productId: string
+    name: string
     price: number
     quantity: number
   }
 
   export type OrderItemUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     product?: ProductUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -12466,6 +12466,7 @@ export namespace Prisma {
   export type OrderItemUncheckedUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }
@@ -12473,6 +12474,7 @@ export namespace Prisma {
   export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
   }

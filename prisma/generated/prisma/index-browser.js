@@ -168,7 +168,6 @@ exports.Prisma.OrderScalarFieldEnum = {
   userId: 'userId',
   totalAmount: 'totalAmount',
   status: 'status',
-  stripeSession: 'stripeSession',
   createdAt: 'createdAt'
 };
 
@@ -176,6 +175,7 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
   productId: 'productId',
+  name: 'name',
   price: 'price',
   quantity: 'quantity'
 };

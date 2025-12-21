@@ -1,5 +1,5 @@
 "use server";
-import { addToGuestCart, getGuestCart } from "@/lib/guest-cart";
+import { addToGuestCart, getGuestCart, setGuestCart } from "@/lib/guest-cart";
 import prisma from "@/lib/prisma";
 import { CartProductSnapshot } from "@/lib/types";
 import { getServerSession } from "next-auth";
@@ -107,7 +107,6 @@ export async function addToCart(
     }
 }
 
-
 export async function getCartItemCount() {
     const session = await getServerSession(authOptions);
 
@@ -136,3 +135,74 @@ export async function getCartItemCount() {
 
     return items.reduce((sum, item) => sum + item.quantity, 0);
 }
+
+export async function getCart() {
+    const session = await getServerSession(authOptions);
+
+    // Logged-in user
+    if (session?.user) {
+        const cart = await prisma.cart.findUnique({
+            where: { userId: session.user.id },
+            include: { items: true },
+        });
+
+        return cart?.items ?? [];
+    }
+
+    // get Guest user cart
+    return await getGuestCart();
+}
+
+export async function updateCartItem(
+    productId: string,
+    quantity: number
+) {
+    const session = await getServerSession(authOptions);
+
+    // 🔐 Logged-in user
+    if (session?.user) {
+        await prisma.cartItem.updateMany({
+            where: {
+                productId,
+                cart: { userId: session.user.id },
+            },
+            data: { quantity },
+        });
+        return;
+    }
+
+    // 👤 Guest user
+    const cart = await getGuestCart();
+
+    const updatedCart = cart.map((item) =>
+        item.productId === productId
+            ? { ...item, quantity }
+            : item
+    );
+
+    await setGuestCart(updatedCart);
+}
+
+export async function removeCartItem(productId: string) {
+    const session = await getServerSession(authOptions);
+
+    // 🔐 Logged-in user
+    if (session?.user) {
+        await prisma.cartItem.deleteMany({
+            where: {
+                productId,
+                cart: { userId: session.user.id },
+            },
+        });
+        return;
+    }
+
+    // 👤 Guest user
+    const cart = await getGuestCart();
+    const updatedCart = cart.filter(
+        (item) => item.productId !== productId
+    );
+
+    await setGuestCart(updatedCart);
+}
+

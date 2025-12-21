@@ -20,7 +20,6 @@ export async function getGuestCart(): Promise<GuestCartItem[]> {
 
 export async function setGuestCart(cart: GuestCartItem[]) {
     const cookieStore = await cookies();
-    console.log("cart2", cart)
 
     cookieStore.set(CART_COOKIE, JSON.stringify(cart), {
         httpOnly: true,

@@ -80,7 +80,6 @@ model Order {
   userId        String
   totalAmount   Int
   status        OrderStatus @default(PENDING)
-  stripeSession String?
   createdAt     DateTime    @default(now())
 
   user          User        @relation(fields: [userId], references: [id])
@@ -91,13 +90,12 @@ model OrderItem {
   id        String   @id @default(cuid())
   orderId   String
   productId String
+  name      String
   price     Int
   quantity  Int
-
   order     Order    @relation(fields: [orderId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
 }
-
 
 enum OrderStatus {
   PENDING
