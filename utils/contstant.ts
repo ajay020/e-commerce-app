@@ -1,0 +1,1 @@
+export const CART_COOKIE = "guest_cart";

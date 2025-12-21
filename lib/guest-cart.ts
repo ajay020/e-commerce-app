@@ -1,9 +1,9 @@
+"use server";
 import { cookies } from "next/headers";
 import { CartProductSnapshot } from "./types";
+import { CART_COOKIE } from "@/utils/contstant";
 
-const CART_COOKIE = "guest_cart";
-
-export type GuestCartItem = {
+type GuestCartItem = {
     productId: string;
     name: string;
     price: number;
@@ -13,12 +13,14 @@ export type GuestCartItem = {
 
 export async function getGuestCart(): Promise<GuestCartItem[]> {
     const cookieStore = await cookies()
+
     const cart = cookieStore.get(CART_COOKIE)
     return cart ? JSON.parse(cart.value) : [];
 }
 
 export async function setGuestCart(cart: GuestCartItem[]) {
     const cookieStore = await cookies();
+    console.log("cart2", cart)
 
     cookieStore.set(CART_COOKIE, JSON.stringify(cart), {
         httpOnly: true,
@@ -49,5 +51,5 @@ export async function addToGuestCart(
         });
     }
 
-    setGuestCart(cart);
+    await setGuestCart(cart);
 }

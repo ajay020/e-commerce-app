@@ -1,4 +1,6 @@
+import { getCartItemCount } from "@/app/actions/cart";
 import AddToCartButton from "@/components/add-button";
+import CartButtonWrapper from "@/components/Cart-button-wrapper";
 import { getProductBySlug } from "@/lib/products";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
@@ -19,8 +21,8 @@ export default async function ProductDetailsPage(
     { params }: { params: Promise<{ slug: string }> }
 ) {
     const { slug } = await params;
-
     const product = await getProductBySlug(slug);
+    const cartCount = await getCartItemCount();
 
     if (!product) notFound();
 
@@ -47,6 +49,7 @@ export default async function ProductDetailsPage(
                         imageUrl: product.imageUrl
                     }
                 } />
+
             </div>
         </main>
     );

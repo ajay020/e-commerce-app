@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { mergeGuestCart } from "../actions/cart";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -13,7 +14,6 @@ export default function LoginPage() {
 
     async function loginUser() {
         setError(null);
-
         const result = await signIn("credentials", {
             email,
             password,
@@ -23,6 +23,14 @@ export default function LoginPage() {
         if (result?.error) {
             setError("Invalid email or password");
             return;
+        }
+
+        // Fetch session AFTER login
+        const res = await fetch("/api/auth/session");
+        const session = await res.json();
+
+        if (session?.user?.id) {
+            await mergeGuestCart(session.user.id);
         }
 
         router.push("/");
