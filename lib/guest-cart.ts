@@ -52,3 +52,8 @@ export async function addToGuestCart(
 
     await setGuestCart(cart);
 }
+
+export async function clearGuestCart() {
+    const cookieStore = await cookies();
+    cookieStore.set(CART_COOKIE, "[]");
+}

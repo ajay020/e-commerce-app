@@ -1,7 +1,6 @@
 "use client";
-
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { mergeGuestCart } from "../actions/cart";
 
@@ -11,6 +10,7 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
 
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     async function loginUser() {
         setError(null);
@@ -33,7 +33,8 @@ export default function LoginPage() {
             await mergeGuestCart(session.user.id);
         }
 
-        router.push("/");
+        const redirectTo = searchParams.get("redirect") || "/";
+        router.push(redirectTo);
     }
 
     return (

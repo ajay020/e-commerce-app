@@ -1,5 +1,6 @@
 import { getCart } from "../actions/cart";
 import CartItemRow from "@/components/cart-item-row";
+import Link from "next/link";
 
 export default async function CartPage() {
     const items = await getCart();
@@ -22,10 +23,15 @@ export default async function CartPage() {
                     <CartItemRow key={item.productId} item={item} />
                 ))}
             </div>
-            
+
             <div className="mt-6 text-right font-semibold">
                 Total: ₹{(total / 100).toFixed(2)}
             </div>
+
+            <Link href={"/checkout"} className="mt-6 text-right">
+                <span className=" bg-black text-white p-2 rounded"> Checkout </span>
+            </Link>
+
         </div>
     );
 }
