@@ -30,7 +30,7 @@ async function main() {
                         price: 299900,
                         stock: 15,
                         imageUrl:
-                            "https://images.unsplash.com/photo-1518441986872-5a1a1c3c33b1",
+                            "https://m.media-amazon.com/images/I/81S-9DCV0JL._AC_SL1500_.jpg",
                     },
                     {
                         name: "Smart Watch",
@@ -48,7 +48,7 @@ async function main() {
                         price: 199900,
                         stock: 30,
                         imageUrl:
-                            "https://images.unsplash.com/photo-1585386959984-a41552231693",
+                            "https://m.media-amazon.com/images/I/811rWDv3zbL._AC_.jpg",
                     },
                 ],
             },
@@ -68,7 +68,7 @@ async function main() {
                         price: 349900,
                         stock: 25,
                         imageUrl:
-                            "https://images.unsplash.com/photo-1528701800489-20be3c6a28c4",
+                            "https://m.media-amazon.com/images/I/81Y2-4uiMSL._AC_SL1500_.jpg",
                     },
                     {
                         name: "Leather Backpack",
@@ -77,7 +77,7 @@ async function main() {
                         price: 599900,
                         stock: 10,
                         imageUrl:
-                            "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb",
+                            "https://m.media-amazon.com/images/I/91nYgA8pGrL._AC_SX679_.jpg",
                     },
                 ],
             },
@@ -96,7 +96,7 @@ async function main() {
                         description: "RGB backlit mechanical keyboard with blue switches.",
                         price: 899900,
                         stock: 15,
-                        imageUrl: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae",
+                        imageUrl: "https://m.media-amazon.com/images/I/61evWZB8a2L._AC_SL1500_.jpg",
                     },
                     {
                         name: "Pro Gaming Mouse",
@@ -104,14 +104,14 @@ async function main() {
                         description: "High-precision 16000 DPI optical sensor mouse.",
                         price: 459900,
                         stock: 30,
-                        imageUrl: "https://unsplash.com/photos/black-and-yellow-logitech-computer-mouse-Pv--vb5vwzQ",
+                        imageUrl: "https://m.media-amazon.com/images/I/61Nrs0DXoJL._AC_SL1001_.jpg",
                     },
                 ],
             },
         },
     });
 
-    
+
 
     console.log("✅ Seeding completed");
 }
