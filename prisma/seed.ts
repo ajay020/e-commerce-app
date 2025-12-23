@@ -104,7 +104,7 @@ async function main() {
                         description: "High-precision 16000 DPI optical sensor mouse.",
                         price: 459900,
                         stock: 30,
-                        imageUrl: "https://m.media-amazon.com/images/I/61Nrs0DXoJL._AC_SL1001_.jpg",
+                        imageUrl: "https://unsplash.com/photos/black-and-yellow-logitech-computer-mouse-Pv--vb5vwzQ",
                     },
                 ],
             },
