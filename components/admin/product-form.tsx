@@ -1,9 +1,15 @@
+"use client"
+
+import { ActionResult } from "@/lib/types";
 import { Category, Product } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { toast } from "sonner";
 
 type Props = {
     product?: Product;
     categories: Category[];
-    action: (formData: FormData) => Promise<void>;
+    action: (formData: FormData) => Promise<ActionResult>;
 };
 
 export default function ProductForm({
@@ -11,8 +17,25 @@ export default function ProductForm({
     categories,
     action,
 }: Props) {
+
+    const [isPending, startTransition] = useTransition()
+    const router = useRouter()
+
+    const handleAction = async (formData: FormData) => {
+        startTransition(async () => {
+            const result = await action(formData);
+
+            if (result?.success) {
+                toast.success(result.message || "Operation successful!");
+                router.push("/admin/products")
+            } else if (result?.error) {
+                toast.error(result.error);
+            }
+        })
+    }
+
     return (
-        <form action={action} className="space-y-4 flex flex-col border p-4 bg-gray-200">
+        <form action={handleAction} className="space-y-4 flex flex-col border p-4 bg-gray-200">
 
             {product && <input type="hidden" name="id" value={product.id} />}
 
@@ -65,7 +88,14 @@ export default function ProductForm({
                 ))}
             </select>
 
-            <button className="bg-blue-500 p-4 text-white cursor-pointer">
+            <button
+                type="submit"
+                disabled={isPending}
+                className="bg-blue-600 text-white cursor-pointer p-2 rounded disabled:bg-blue-300 flex items-center justify-center gap-2"
+            >
+                {isPending && (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                )}
                 {product ? "Update Product" : "Create Product"}
             </button>
         </form>

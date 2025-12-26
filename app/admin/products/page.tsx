@@ -27,7 +27,7 @@ export default async function AdminProductsPage() {
                     {products.map((p) => (
                         <tr key={p.id} className="border-t hover:bg-gray-50">
                             <td className="p-2">{p.name}</td>
-                            <td className="p-2">₹{(p.price / 100).toFixed(2)}</td>
+                            <td className="p-2">₹{p.price}</td>
                             <td className="p-2">{p.stock}</td>
                             <td className="p-2">
                                 <Link
