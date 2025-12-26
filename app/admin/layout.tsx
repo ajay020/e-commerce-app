@@ -14,6 +14,7 @@ export default async function AdminLayout({
                 <nav className="flex flex-col">
                     <Link href="/admin/products">Products</Link>
                     <Link href="/admin/orders">Orders</Link>
+                    <Link href="/admin/categories">Categories</Link>
                 </nav>
             </aside>
 

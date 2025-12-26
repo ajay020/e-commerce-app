@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import { deleteCategory } from "@/app/actions/admin-categories";
+import CategoryList from "@/components/admin/category-list";
 
 export default async function CategoriesPage() {
     const categories = await prisma.category.findMany();
@@ -11,26 +11,8 @@ export default async function CategoriesPage() {
                 + Add Category
             </Link>
 
-            <ul>
-                {categories.map((c) => (
-                    <li key={c.id} className="flex gap-4">
-                        <span>{c.name}</span>
+            <CategoryList categories={categories} />
 
-                        <Link href={`/admin/categories/${c.id}/edit`}>
-                            Edit
-                        </Link>
-
-                        <form
-                            action={async () => {
-                                "use server";
-                                await deleteCategory(c.id);
-                            }}
-                        >
-                            <button type="submit">Delete</button>
-                        </form>
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 }

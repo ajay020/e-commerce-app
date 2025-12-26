@@ -12,3 +12,9 @@ export type CartProductSnapshot = {
     price: number;
     imageUrl: string;
 };
+
+export type ActionResult = {
+    success?: boolean;
+    error?: string | null;
+    message?: string
+};

@@ -2,52 +2,111 @@
 
 import { requireAdmin } from "@/lib/admin";
 import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
+import { ActionResult } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
-export async function createCategory(formData: FormData) {
-    await requireAdmin();
+export async function createCategory(formData: FormData): Promise<ActionResult> {
+    try {
+        await requireAdmin();
+        const name = formData.get("name") as string;
+        const slug = formData.get("slug") as string;
 
-    const name = formData.get("name") as string;
-    const slug = formData.get("slug") as string;
+        if (!name || !slug) {
+            return {
+                error: "Invalid input"
+            }
+        }
 
-    await prisma.category.create({
-        data: { name, slug },
-    });
+        await prisma.category.create({
+            data: { name, slug },
+        });
 
-    redirect("/admin/categories");
+        return {
+            success: true,
+            message: "Category has been created."
+        };
+
+    } catch (error) {
+        console.error("[CREATE_CATEGORY_ERROR]:", error);
+
+        return {
+            error: "An unexpected database error occurred. Please try again."
+        };
+    }
 }
 
-export async function updateCategory(formData: FormData) {
-    await requireAdmin();
+export async function updateCategory(formData: FormData): Promise<ActionResult> {
 
-    const id = formData.get("id") as string;
+    try {
+        await requireAdmin();
 
-    await prisma.category.update({
-        where: { id },
-        data: {
-            name: formData.get("name") as string,
-            slug: formData.get("slug") as string,
-        },
-    });
+        const id = formData.get("id") as string;
 
-    redirect("/admin/categories");
-}
+        await prisma.category.update({
+            where: { id },
+            data: {
+                name: formData.get("name") as string,
+                slug: formData.get("slug") as string,
+            },
+        });
 
-export async function deleteCategory(id: string) {
-    await requireAdmin();
+        return {
+            success: true,
+            message: "Category has been updated."
+        };
 
-    // safety: prevent delete if products exist
-    const productsCount = await prisma.product.count({
-        where: { categoryId: id },
-    });
+    } catch (error) {
+        console.error("[UPDATE_CATEGORY_ERROR]:", error);
 
-    if (productsCount > 0) {
-        throw new Error("Category has products");
+        return {
+            error: "An unexpected database error occurred. Please try again."
+        };
     }
 
-    await prisma.category.delete({
-        where: { id },
-    });
 
-    redirect("/admin/categories");
 }
+
+export async function deleteCategory(
+    _: ActionResult | null,
+    formData: FormData
+): Promise<ActionResult> {
+    try {
+        //  Authorization Check
+        await requireAdmin();
+
+        const id = formData.get("id");
+        if (!id || typeof id !== "string") {
+            return { error: "Invalid category ID provided." };
+        }
+
+        const hasProducts = await prisma.product.findFirst({
+            where: { categoryId: id },
+            select: { id: true }
+        });
+
+        if (hasProducts) {
+            return {
+                error: "Cannot delete: This category is still linked to products.",
+            };
+        }
+
+        await prisma.category.delete({
+            where: { id }
+        });
+
+        revalidatePath("/admin/categories");
+
+        return {
+            success: true,
+            message: "Category has been permanently removed."
+        };
+    } catch (error) {
+        console.error("[DELETE_CATEGORY_ERROR]:", error);
+
+        return {
+            error: "An unexpected database error occurred. Please try again."
+        };
+    }
+
+}
+
