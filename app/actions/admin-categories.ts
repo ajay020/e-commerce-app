@@ -4,18 +4,26 @@ import { requireAdmin } from "@/lib/admin";
 import prisma from "@/lib/prisma";
 import { ActionResult } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import { CategorySchema } from "../schemas/category";
 
 export async function createCategory(formData: FormData): Promise<ActionResult> {
     try {
         await requireAdmin();
-        const name = formData.get("name") as string;
-        const slug = formData.get("slug") as string;
 
-        if (!name || !slug) {
+        // 1. Convert FormData to an object and Validate
+        const validatedFields = CategorySchema.safeParse(
+            Object.fromEntries(formData.entries())
+        );
+
+        // console.log(validatedFields)
+
+        if (!validatedFields.success) {
             return {
-                error: "Invalid input"
-            }
+                error: validatedFields.error.flatten().fieldErrors.name?.[0] || "Invalid input",
+            };
         }
+
+        const { id, name, slug } = validatedFields.data;
 
         await prisma.category.create({
             data: { name, slug },
