@@ -6,6 +6,13 @@ import { ActionResult } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 import { CategorySchema } from "../schemas/category";
 
+
+export async function getCategories() {
+    return prisma.category.findMany({
+        orderBy: { name: "asc" },
+    });
+}
+
 export async function createCategory(formData: FormData): Promise<ActionResult> {
     try {
         await requireAdmin();

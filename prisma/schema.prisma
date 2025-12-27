@@ -48,6 +48,8 @@ model Product {
 
   orderItems  OrderItem[]
   cartItems   CartItem[]
+
+  @@index([name])
 }
 
 model Cart {

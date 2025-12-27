@@ -4,6 +4,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import CartButton from "./cart-button";
 import AuthButton from "./auth-button";
 import { getCartItemCount } from "@/app/actions/cart";
+import SearchBar from "./search-bar";
+import CategoryFilter from "./category/category-filter";
+import { getCategories } from "@/app/actions/admin-categories";
 
 export default async function Navbar() {
     const session = await getServerSession(authOptions);
@@ -14,6 +17,8 @@ export default async function Navbar() {
             <Link href="/" className="font-bold text-lg">
                 Shop
             </Link>
+
+            <SearchBar />
 
             <div className="flex items-center gap-4">
                 <CartButton count={cartCount} />
